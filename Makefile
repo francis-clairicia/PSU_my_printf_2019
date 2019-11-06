@@ -5,8 +5,10 @@
 ## Makefile
 ##
 
-SRC	=	my_printf.c	\
-		my_printf_functions.c
+SRC	=	my_printf.c		\
+		my_printf_functions.c	\
+		my_putnbr_base_u.c	\
+		convert_base_u.c
 
 CFLAGS	=	-I./include/ -Wall -Wextra -Werror
 
@@ -26,7 +28,7 @@ tests_run:	all
 	gcc -o unit_tests $(SRC) tests/*.c -L. -lmy $(CFLAGS) --coverage -lcriterion
 	./unit_tests
 	rm -f unit_tests test*.gc*
-	mkidr -p coverage
+	mkdir -p coverage
 	mv *.gc* coverage/
 
 debug:	all

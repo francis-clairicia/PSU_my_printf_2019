@@ -7,12 +7,6 @@
 
 #include <my_printf.h>
 
-typedef struct flag_s
-{
-    char *type_list;
-    void (*print)(va_list *);
-} flag_t;
-
 const flag_t flags[] = {
     {"di", &print_number},
     {"c", &print_char},

@@ -14,7 +14,7 @@ int my_str_isprintable(char const *str)
     if (str == NULL)
         return (0);
     while (str[i] != '\0') {
-        if (str[i] < ' ')
+        if (str[i] < 32)
             return (0);
         i += 1;
     }

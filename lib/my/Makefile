@@ -65,4 +65,4 @@ $(NAME):	$(OBJ)
 	cp my*.h ../../include
 
 clean:
-	rm -f $(OBJ)
+	rm -f *.o
