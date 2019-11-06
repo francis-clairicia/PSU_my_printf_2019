@@ -48,7 +48,8 @@ SRC	=	my_put_nbr.c			\
 		my_free_list.c			\
 		my_concat_list.c		\
 		my_rev_list.c			\
-		my_nbr_to_str.c
+		my_nbr_to_str.c			\
+		my_nbr_len.c
 
 CFLAGS	=	-I. -Wall -Wextra -Werror
 

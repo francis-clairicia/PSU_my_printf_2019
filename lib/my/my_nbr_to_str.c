@@ -7,18 +7,6 @@
 
 #include <my.h>
 
-int my_nbr_len(int nb)
-{
-    int len = 1;
-    int multiple_of_ten = 1;
-
-    while (nb / multiple_of_ten > 9) {
-        multiple_of_ten *= 10;
-        len += 1;
-    }
-    return (len);
-}
-
 char *my_nbr_to_str(int nb)
 {
     int len = my_nbr_len(nb);

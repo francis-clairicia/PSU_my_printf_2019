@@ -14,7 +14,7 @@
 typedef struct flag_s
 {
     char *type_list;
-    void (*print)(va_list *);
+    int (*print)(va_list *);
 } flag_t;
 
 typedef struct base_s
@@ -24,11 +24,11 @@ typedef struct base_s
 } base_t;
 
 int my_printf(char const *format, ...);
-void print_number(va_list *args);
-void print_number_base(va_list *args, char type);
-void print_char(va_list *args);
-void print_str(va_list *args);
-void print_str_non_printable(va_list *args);
+int print_number(va_list *args);
+int print_number_base(va_list *args, char type);
+int print_char(va_list *args);
+int print_str(va_list *args);
+int print_str_non_printable(va_list *args);
 
 char *convert_to_base_u(unsigned int nb, char const *base);
 int my_putnbr_base_u(unsigned int nb, char const *base);

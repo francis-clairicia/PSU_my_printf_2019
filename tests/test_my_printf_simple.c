@@ -11,55 +11,81 @@
 
 Test(my_printf, print_a_string)
 {
+    char test[] = "I am a test.";
+    int n = 0;
+
     cr_redirect_stdout();
-    my_printf("I am a test.");
-    cr_expect_stdout_eq_str("I am a test.");
+    n = my_printf("I am a test.");
+    cr_expect_stdout_eq_str(test);
+    cr_expect_eq(n, my_strlen(test));
 }
 
 Test(my_printf, handle_d_flag)
 {
+    char test[] = "I am 5 years old";
+    int n = 0;
+
     cr_redirect_stdout();
-    my_printf("I am %d", 5);
-    cr_expect_stdout_eq_str("I am 5");
+    n = my_printf("I am %d years old", 5);
+    cr_expect_stdout_eq_str(test);
+    cr_expect_eq(n, my_strlen(test));
 }
 
 Test(my_printf, handle_i_flag)
 {
+    char test[] = "You finished 12th";
+    int n = 0;
+
     cr_redirect_stdout();
-    my_printf("You finished %ith", 12);
-    cr_expect_stdout_eq_str("You finished 12th");
+    n = my_printf("You finished %ith", 12);
+    cr_expect_stdout_eq_str(test);
+    cr_expect_eq(n, my_strlen(test));
 }
 
 Test(my_printf, handle_c_flag)
 {
+    char test[] = "B0SS";
+    int n = 0;
+
     cr_redirect_stdout();
-    my_printf("B%cSS", '0');
-    cr_expect_stdout_eq_str("B0SS");
+    n = my_printf("B%cSS", '0');
+    cr_expect_stdout_eq_str(test);
+    cr_expect_eq(n, my_strlen(test));
 }
 
 Test(my_printf, handle_s_flag)
 {
+    char test[] = "I will be complete";
+    int n = 0;
+
     cr_redirect_stdout();
-    my_printf("I %s complete", "will be");
-    cr_expect_stdout_eq_str("I will be complete");
+    n = my_printf("I %s complete", "will be");
+    cr_expect_stdout_eq_str(test);
+    cr_expect_eq(n, my_strlen(test));
 }
 
 Test(my_printf, handle_percent_flag)
 {
+    int n = 0;
+
     cr_redirect_stdout();
-    my_printf("%%");
+    n = my_printf("%%");
     cr_expect_stdout_eq_str("%");
+    cr_expect_eq(n, 1);
 }
 
 Test(my_printf, handle_multiple_flag_in_a_string)
 {
-    char fn[] = "Mickael";
-    char ln[] = "Stanislas";
+    char test[] = "I am Mickael Stanislas. I am 32 and I have 2 sisters.";
+    char str[] = "I am %s %s. I am %d and I have %c sisters.";
+    char first_name[] = "Mickael";
+    char last_name[] = "Stanislas";
     int age = 32;
-    char sis = '2';
-    char expected[] = "I am Mickael Stanislas. I am 32 and I have 2 sisters.";
+    char sisters = '2';
+    int n = 0;
 
     cr_redirect_stdout();
-    my_printf("I am %s %s. I am %d and I have %c sisters.", fn, ln, age, sis);
-    cr_expect_stdout_eq_str(expected);
+    n = my_printf(str, first_name, last_name, age, sisters);
+    cr_expect_stdout_eq_str(test);
+    cr_expect_eq(n, my_strlen(test));
 }

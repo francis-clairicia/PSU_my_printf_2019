@@ -43,10 +43,10 @@ int my_showstr(char const *str);
 int my_showmem(char const *str, int size);
 char *my_strcat(char *dest, char const *src);
 char *my_strncat(char *dest, char const *src, int nb);
-int my_show_word_array(char * const *tab);
-char **my_str_to_word_array(char const *str);
 char *my_strdup(char const *src);
 char *my_strdup_char(char c);
+char *my_nbr_to_str(int nb);
+int my_nbr_len(int nb);
 int my_find_char(char const *str, char c);
 char *convert_base(char const *nbr, char const *base_from, char const *base_to);
 
