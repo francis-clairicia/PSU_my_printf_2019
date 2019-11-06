@@ -5,9 +5,10 @@
 ** Recode the printf function
 */
 
+#include <mylist.h>
 #include <my_printf.h>
 
-const flag_t flags[] = {
+static const flag_t flag_list[] = {
     {"di", &print_number},
     {"c", &print_char},
     {"s", &print_str},
@@ -15,23 +16,39 @@ const flag_t flags[] = {
     {NULL, NULL}
 };
 
-static int print_replacing_flag(char type, va_list *args)
+static int print_replacing_flag(linked_list_t *flags, va_list *args)
 {
     int i = 0;
     int n = 0;
 
-    if (my_find_char("bouxX", type) != -1)
-        return (print_number_base(args, type));
-    while (flags[i].type_list != NULL) {
-        if (my_find_char(flags[i].type_list, type) != -1)
-            n = flags[i].print(args);
+    if (my_find_char("bouxX", flags->character) != -1)
+        return (print_number_base(args, flags->character));
+    while (flag_list[i].type != NULL) {
+        if (my_find_char(flag_list[i].type, flags->character) != -1)
+            n = flag_list[i].print(args);
         i += 1;
     }
     return (n);
 }
 
+static int get_flags(linked_list_t **flags, char const *str)
+{
+    int i = 0;
+
+    while (str[i] != '\0' && my_find_char("dibouxXcsS", str[i]) == -1) {
+        my_put_char_in_list(flags, str[i]);
+        i += 1;
+    }
+    my_put_char_in_list(flags, str[i]);
+    my_rev_list(flags);
+    return (i);
+}
+
 static int my_printf_part2(char const *format, int *i, va_list *args)
 {
+    linked_list_t *flags = NULL;
+    int n = 0;
+
     if (format[*i] != '%') {
         my_putchar(format[*i]);
         return (1);
@@ -41,7 +58,10 @@ static int my_printf_part2(char const *format, int *i, va_list *args)
         my_putchar('%');
         return (1);
     }
-    return (print_replacing_flag(format[*i], args));
+    *i += get_flags(&flags, &format[*i]);
+    n = print_replacing_flag(flags, args);
+    my_free_list(&flags);
+    return (n);
 }
 
 int my_printf(char const *format, ...)

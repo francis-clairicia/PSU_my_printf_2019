@@ -13,7 +13,7 @@
 
 typedef struct flag_s
 {
-    char *type_list;
+    char *type;
     int (*print)(va_list *);
 } flag_t;
 
