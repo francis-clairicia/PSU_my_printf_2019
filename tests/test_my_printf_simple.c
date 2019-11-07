@@ -64,6 +64,20 @@ Test(my_printf, handle_s_flag)
     cr_expect_eq(n, my_strlen(test));
 }
 
+Test(my_printf, handle_p_flag)
+{
+    char *test = my_strdup("Test");
+    char buffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int n = 0;
+
+    cr_redirect_stdout();
+    sprintf(buffer, "%p", test);
+    n = my_printf("%p", test);
+    cr_expect_stdout_eq_str(buffer);
+    cr_expect_eq(n, my_strlen(buffer));
+    free(test);
+}
+
 Test(my_printf, handle_percent_flag)
 {
     int n = 0;
