@@ -13,6 +13,7 @@ static const flag_t flag_list[] = {
     {"c", &print_char},
     {"s", &print_str},
     {"S", &print_str_non_printable},
+    {"p", &print_pointer},
     {NULL, NULL}
 };
 
@@ -35,7 +36,7 @@ static int get_flags(linked_list_t **flags, char const *str)
 {
     int i = 0;
 
-    while (str[i] != '\0' && my_find_char("dibouxXcsS", str[i]) == -1) {
+    while (str[i] != '\0' && my_find_char("dibouxXcsSp", str[i]) == -1) {
         my_put_char_in_list(flags, str[i]);
         i += 1;
     }

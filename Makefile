@@ -8,6 +8,7 @@
 SRC	=	my_printf.c		\
 		my_printf_number.c	\
 		my_printf_str.c		\
+		my_printf_pointer.c	\
 		my_putnbr_base_u.c	\
 		convert_base_u.c
 
