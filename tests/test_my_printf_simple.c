@@ -66,16 +66,15 @@ Test(my_printf, handle_s_flag)
 
 Test(my_printf, handle_p_flag)
 {
-    char *test = my_strdup("Test");
+    int int_tab[] = {2, 3, 4};
     char buffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     int n = 0;
 
     cr_redirect_stdout();
-    sprintf(buffer, "%p", test);
-    n = my_printf("%p", test);
+    sprintf(buffer, "%p", int_tab);
+    n = my_printf("%p", int_tab);
     cr_expect_stdout_eq_str(buffer);
     cr_expect_eq(n, my_strlen(buffer));
-    free(test);
 }
 
 Test(my_printf, handle_percent_flag)
