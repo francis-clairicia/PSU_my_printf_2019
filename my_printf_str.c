@@ -55,7 +55,7 @@ int print_str_non_printable(va_list *args, modifier_t *infos)
     len += print_before(infos, size);
     while (str[i] != '\0') {
         if (str[i] < 32 || str[i] >= 127) {
-            len += my_printf("\\%03o", str[i]);
+            len += my_printf("\\%.3o", str[i]);
         } else {
             my_putchar(str[i]);
             len += 1;

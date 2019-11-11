@@ -26,11 +26,11 @@ static void get_infos(char type, char *modifiers, modifier_t *infos)
 {
     int i = 0;
 
-    infos->padding = my_getnbr(modifiers);
     while (modifiers[i] != '\0' && my_find_char("lhq", modifiers[i]) == -1) {
         if (modifiers[i] == '#' && my_find_char("oxX", type) >= 0)
             infos->sharp = 1;
-        if (modifiers[i] == '0' && my_find_char(modifiers, '-') == -1) {
+        if ((modifiers[i] == '0' && my_find_char(modifiers, '-') == -1)
+            || (modifiers[i] == '.')) {
             infos->char_to_print = '0';
             infos->padding = my_getnbr(&modifiers[i + 1]);
         }
@@ -48,7 +48,7 @@ static void get_infos(char type, char *modifiers, modifier_t *infos)
 static int print_replacing_flag(char type, char *modifiers, va_list *args)
 {
     int i = 0;
-    modifier_t infos;
+    modifier_t infos = {my_getnbr(modifiers), ' ', 0, 0, NULL};
 
     get_infos(type, modifiers, &infos);
     while (flag_list[i].type != NULL) {
