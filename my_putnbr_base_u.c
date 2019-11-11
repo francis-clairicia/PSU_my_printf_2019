@@ -1,19 +1,20 @@
 /*
 ** EPITECH PROJECT, 2019
-** My put nbr base
+** my_printf()
 ** File description:
-** Base
+** Base conversion
 */
 
 #include <my_printf.h>
-#include <mylist.h>
 
-int my_putnbr_base_u(unsigned int nbr, char const *base)
+int my_putnbr_base_u(unsigned long nb, modifier_t *infos, char const *base)
 {
-    char *nbr_converted = convert_to_base_u(nbr, base);
-    int len = my_strlen(nbr_converted);
+    char *nb_converted = convert_to_base_u(nb, base);
+    int size = my_strlen(nb_converted);
+    int len = size;
 
-    my_putstr(nbr_converted);
-    free(nbr_converted);
+    len += print_before(infos, size);
+    my_putstr(nb_converted);
+    len += print_after(infos, size);
     return (len);
 }

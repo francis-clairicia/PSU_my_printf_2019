@@ -8,7 +8,7 @@
 #include <my_printf.h>
 #include <mylist.h>
 
-char *convert_to_base_u(unsigned int nbr, char const *base)
+char *convert_to_base_u(unsigned long nbr, char const *base)
 {
     linked_list_t *result = NULL;
     char *str_result = NULL;

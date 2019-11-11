@@ -11,27 +11,37 @@
 #ifndef HEADER_MY_PRINTF
 #define HEADER_MY_PRINTF
 
+typedef struct modifier_s
+{
+    int padding;
+    char char_to_print;
+    int sharp;
+    int print_sign;
+    char *lenght_modifier;
+} modifier_t;
+
 typedef struct flag_s
 {
     char *type;
-    int (*print)(va_list *);
+    int (*print)(va_list *, modifier_t *);
 } flag_t;
 
-typedef struct base_s
-{
-    char type;
-    char *char_list;
-} base_t;
-
 int my_printf(char const *format, ...);
-int print_number(va_list *args);
-int print_number_base(va_list *args, char type);
-int print_char(va_list *args);
-int print_str(va_list *args);
-int print_str_non_printable(va_list *args);
-int print_pointer(va_list *args);
+int print_number(va_list *args, modifier_t *infos);
+int print_binary(va_list *args, modifier_t *infos);
+int print_octal(va_list *args, modifier_t *infos);
+int print_hexa_lower(va_list *args, modifier_t *infos);
+int print_hexa_upper(va_list *args, modifier_t *infos);
+int print_decimal(va_list *args, modifier_t *infos);
+int print_char(va_list *args, modifier_t *infos);
+int print_str(va_list *args, modifier_t *infos);
+int print_str_non_printable(va_list *args, modifier_t *infos);
+int print_pointer(va_list *args, modifier_t *infos);
 
-char *convert_to_base_u(unsigned int nb, char const *base);
-int my_putnbr_base_u(unsigned int nb, char const *base);
+int print_before(modifier_t *infos, int size_print);
+int print_after(modifier_t *infos, int size_print);
+char *convert_to_base_u(unsigned long nb, char const *base);
+int my_putnbr_base_u(unsigned long nb, modifier_t *infos, char const *base);
+int my_nbr_len_u(unsigned long nb);
 
 #endif

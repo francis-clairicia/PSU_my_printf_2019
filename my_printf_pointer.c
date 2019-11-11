@@ -9,30 +9,13 @@
 #include <my_printf.h>
 #include <mylist.h>
 
-static char *get_pointer(unsigned long ptr_value)
+int print_pointer(va_list *args, modifier_t *infos)
 {
-    char base[] = "0123456789abcdef";
-    linked_list_t *list = NULL;
-    char *ptr = NULL;
+    unsigned long nb = va_arg(*args, unsigned long);
+    int len = 0;
 
-    while (ptr_value > 0) {
-        my_put_char_in_list(&list, base[ptr_value % 16]);
-        ptr_value /= 16;
-    }
-    my_put_char_in_list(&list, 'x');
-    my_put_char_in_list(&list, '0');
-    ptr = my_list_to_string(list);
-    my_free_list(&list);
-    return (ptr);
-}
-
-int print_pointer(va_list *args)
-{
-    unsigned long ptr_value = va_arg(*args, unsigned long);
-    char *ptr = get_pointer(ptr_value);
-    int len = my_strlen(ptr);
-
-    my_putstr(ptr);
-    free(ptr);
+    len += print_before(infos, my_nbr_len_u(nb));
+    len += my_printf("%#lx", nb);
+    len += print_after(infos, my_nbr_len_u(nb));
     return (len);
 }

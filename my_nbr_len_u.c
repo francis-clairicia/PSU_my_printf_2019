@@ -5,16 +5,12 @@
 ** Lenght ofa number
 */
 
-#include <my.h>
+#include <my_printf.h>
 
-int my_nbr_len(long nb)
+int my_nbr_len_u(unsigned long nb)
 {
     int len = 1;
 
-    if (nb < 0) {
-        len = 2;
-        nb = -nb;
-    }
     while (nb > 9) {
         nb /= 10;
         len += 1;

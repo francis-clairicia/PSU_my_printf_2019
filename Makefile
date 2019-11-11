@@ -5,11 +5,18 @@
 ## Makefile
 ##
 
-SRC	=	my_printf.c		\
-		my_printf_number.c	\
-		my_printf_str.c		\
-		my_printf_pointer.c	\
-		my_putnbr_base_u.c	\
+SRC	=	my_printf.c			\
+		my_printf_number.c		\
+		my_printf_str.c			\
+		my_printf_pointer.c		\
+		my_printf_binary.c		\
+		my_printf_octal.c		\
+		my_printf_decimal.c		\
+		my_printf_hexa_lower.c		\
+		my_printf_hexa_upper.c		\
+		my_printf_modifier.c		\
+		my_putnbr_base_u.c		\
+		my_nbr_len_u.c			\
 		convert_base_u.c
 
 CFLAGS	=	-I./include/ -Wall -Wextra -Werror
@@ -34,7 +41,7 @@ tests_run:	all
 	mv *.gc* coverage/
 
 debug:	all
-	gcc -g main.c $(SRC) $(CFLAGS) -L. -lmy
+	gcc -g main.c $(SRC) -I./include -L. -lmy
 
 clean:
 	rm -f $(OBJ)

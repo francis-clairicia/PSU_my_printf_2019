@@ -7,51 +7,61 @@
 
 #include <my_printf.h>
 
-int print_char(va_list *args)
+static int get_str_size(char const *str)
 {
+    int i = 0;
+    int len = 0;
+
+    while (str[i] != '\0') {
+        if (str[i] < 32 || str[i] >= 127)
+            len += 4;
+        else
+            len += 1;
+        i += 1;
+    }
+    return (len);
+}
+
+int print_char(va_list *args, modifier_t *infos)
+{
+    int len = 0;
     unsigned char c = va_arg(*args, int);
 
-    write(1, &c, 1);
-    return (1);
+    len += print_before(infos, 1);
+    len += write(1, &c, 1);
+    len += print_after(infos, 1);
+    return (len);
 }
 
-int print_str(va_list *args)
+int print_str(va_list *args, modifier_t *infos)
 {
+    int len = 0;
     char *str = va_arg(*args, char *);
+    int size = get_str_size(str);
 
+    len += print_before(infos, size);
     my_putstr(str);
-    return (my_strlen(str));
+    len += print_after(infos, size);
+    return (size + len);
 }
 
-static void print_char_as_octal(char c)
-{
-    char *nb = convert_to_base(c, "01234567");
-    int len = my_strlen(nb);
-
-    my_putchar('\\');
-    while (len < 3) {
-        my_putchar('0');
-        len += 1;
-    }
-    my_putstr(nb);
-    free(nb);
-}
-
-int print_str_non_printable(va_list *args)
+int print_str_non_printable(va_list *args, modifier_t *infos)
 {
     char *str = va_arg(*args, char *);
     int len = 0;
     int i = 0;
+    int size = get_str_size(str);
 
+    len += print_before(infos, size);
     while (str[i] != '\0') {
-        if (str[i] < 32) {
-            print_char_as_octal(str[i]);
-            len += 4;
+        if (str[i] < 32 || str[i] >= 127) {
+            len += my_printf("\\%03o", str[i]);
         } else {
             my_putchar(str[i]);
             len += 1;
         }
         i += 1;
     }
+    len += print_after(infos, size);
     return (len);
 }
