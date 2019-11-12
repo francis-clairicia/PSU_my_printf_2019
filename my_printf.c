@@ -48,7 +48,7 @@ static void get_infos(char type, char *modifiers, modifier_t *infos)
 static int print_replacing_flag(char type, char *modifiers, va_list *args)
 {
     int i = 0;
-    modifier_t infos = {my_getnbr(modifiers), ' ', 0, 0, NULL};
+    modifier_t infos = {type, my_getnbr(modifiers), ' ', 0, 0, NULL};
 
     get_infos(type, modifiers, &infos);
     while (flag_list[i].type != NULL) {

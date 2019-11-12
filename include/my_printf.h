@@ -13,6 +13,7 @@
 
 typedef struct modifier_s
 {
+    char type;
     int padding;
     char char_to_print;
     int sharp;
@@ -41,7 +42,9 @@ int print_pointer(va_list *args, modifier_t *infos);
 int print_before(modifier_t *infos, int size_print);
 int print_after(modifier_t *infos, int size_print);
 char *convert_to_base_u(unsigned long nb, char const *base);
+char *convert_to_base_long(long nb, char const *base);
 int my_putnbr_base_u(unsigned long nb, modifier_t *infos, char const *base);
+int my_putnbr_long(long nb, modifier_t *infos);
 int my_nbr_len_u(unsigned long nb);
 
 #endif

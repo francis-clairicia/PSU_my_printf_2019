@@ -15,9 +15,9 @@ SRC	=	my_printf.c			\
 		my_printf_hexa_lower.c		\
 		my_printf_hexa_upper.c		\
 		my_printf_modifier.c		\
-		my_putnbr_base_u.c		\
+		my_putnbr_for_printf.c		\
 		my_nbr_len_u.c			\
-		convert_base_u.c
+		convert_base_for_printf.c
 
 CFLAGS	=	-I./include/ -Wall -Wextra -Werror
 
