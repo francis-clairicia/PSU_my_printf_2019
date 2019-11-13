@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_printf()
+** my_printf
 ** File description:
-** printf command-like
+** print command-like
 */
 
 #include <my.h>

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** Test my_printf()
+** Test my_printf
 ** File description:
 ** Test a function
 */

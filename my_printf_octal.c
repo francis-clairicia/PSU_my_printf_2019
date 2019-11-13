@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_printf()
+** my_printf
 ** File description:
-** Recode the printf function
+** Recode the print function
 */
 
 #include <my_printf.h>

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_printf()
+** my_printf
 ** File description:
 ** Base conversion
 */
