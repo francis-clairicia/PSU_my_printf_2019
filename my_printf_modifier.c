@@ -54,8 +54,9 @@ int print_before(modifier_t *infos, int size_print)
 int print_after(modifier_t *infos, int size_print)
 {
     int i = 0;
+    int sign = (infos->sign > 0);
 
-    while (i - size_print > infos->padding) {
+    while (i - size_print - sign > infos->padding) {
         my_putchar(' ');
         i -= 1;
     }

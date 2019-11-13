@@ -61,7 +61,7 @@ static int get_modifiers(char **modifiers, char const *str)
 {
     int i = 0;
 
-    while (str[i] != '\0' && my_find_char("dibouxXcsSp", str[i]) == -1)
+    while (str[i] != '\0' && my_find_char("%dibouxXcsSp", str[i]) == -1)
         i += 1;
     *modifiers = malloc(sizeof(char) * (i + 1));
     my_strncpy(*modifiers, str, i);
@@ -79,12 +79,12 @@ static int my_printf_part2(char const *format, int *i, va_list *args)
         return (1);
     }
     *i += 1;
+    *i += get_modifiers(&modifiers, &format[*i]);
     if (format[*i] == '%'){
         my_putchar('%');
-        return (1);
-    }
-    *i += get_modifiers(&modifiers, &format[*i]);
-    n = print_replacing_flag(format[*i], modifiers, args);
+        n = 1;
+    } else
+        n = print_replacing_flag(format[*i], modifiers, args);
     free(modifiers);
     return (n);
 }
