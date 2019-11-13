@@ -29,17 +29,17 @@ static void get_infos(char type, char *modifiers, modifier_t *infos)
     while (modifiers[i] != '\0' && my_find_char("lhq", modifiers[i]) == -1) {
         if (modifiers[i] == '#' && my_find_char("oxX", type) >= 0)
             infos->sharp = 1;
-        if ((modifiers[i] == '0' && my_find_char(modifiers, '-') == -1)
-            || (modifiers[i] == '.')) {
+        if (((modifiers[i] == '0' && my_find_char(modifiers, '-') == -1)
+        || (modifiers[i] == '.'))
+        && my_find_char("0123456789", modifiers[i + 1])) {
             infos->char_to_print = '0';
             infos->padding = my_getnbr(&modifiers[i + 1]);
         }
         if (modifiers[i] == '+' && my_find_char("di", type) >= 0)
-            infos->print_sign = 1;
-        if (modifiers[i] == '-') {
-            infos->char_to_print = ' ';
+            infos->sign = 1;
+        if (modifiers[i] == '-'
+        && my_find_char("0123456789", modifiers[i + 1]))
             infos->padding = my_getnbr(&modifiers[i + 1]);
-        }
         i += 1;
     }
     infos->lenght_modifier = &modifiers[i];

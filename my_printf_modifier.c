@@ -1,21 +1,13 @@
-
 /*
 ** EPITECH PROJECT, 2019
 ** my_printf()
 ** File description:
-** Recode the printf function
+** Modifiers
 */
 
 #include <my_printf.h>
 
-struct format
-{
-    char type;
-    char *format;
-    int len;
-};
-
-const struct format sharp_format[] = {
+const format_t sharp_format[] = {
     {'o', "0", 1},
     {'x', "0x", 2},
     {'X', "0X", 2}
@@ -42,13 +34,17 @@ int print_before(modifier_t *infos, int size_print)
 
     if (infos->sharp == 1)
         len += print_sharp_format(infos->type);
-    if (infos->print_sign == 1) {
-        my_putchar('+');
+    if (infos->sign > 0 && infos->char_to_print == '0') {
+        my_putchar(infos->sign);
         len += 1;
     }
     while (i + size_print < infos->padding) {
         my_putchar(infos->char_to_print);
         i += 1;
+    }
+    if (infos->sign > 0 && infos->char_to_print == ' ') {
+        my_putchar(infos->sign);
+        len += 1;
     }
     return (len + i);
 }

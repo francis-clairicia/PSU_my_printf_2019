@@ -11,13 +11,20 @@
 #ifndef HEADER_MY_PRINTF
 #define HEADER_MY_PRINTF
 
+typedef struct format
+{
+    char type;
+    char *format;
+    int len;
+} format_t;
+
 typedef struct modifier_s
 {
     char type;
     int padding;
     char char_to_print;
     int sharp;
-    int print_sign;
+    char sign;
     char *lenght_modifier;
 } modifier_t;
 
@@ -38,7 +45,6 @@ int print_char(va_list *args, modifier_t *infos);
 int print_str(va_list *args, modifier_t *infos);
 int print_str_non_printable(va_list *args, modifier_t *infos);
 int print_pointer(va_list *args, modifier_t *infos);
-
 int print_before(modifier_t *infos, int size_print);
 int print_after(modifier_t *infos, int size_print);
 char *convert_to_base_u(unsigned long nb, char const *base);
