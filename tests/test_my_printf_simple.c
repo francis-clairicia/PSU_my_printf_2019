@@ -22,11 +22,11 @@ Test(my_printf, print_a_string)
 
 Test(my_printf, handle_d_flag)
 {
-    char test[] = "I am 5 years old";
+    char test[] = "I am 50 years old";
     int n = 0;
 
     cr_redirect_stdout();
-    n = my_printf("I am %d years old", 5);
+    n = my_printf("I am %d%d years old", 5, 0);
     cr_expect_stdout_eq_str(test);
     cr_expect_eq(n, my_strlen(test));
 }

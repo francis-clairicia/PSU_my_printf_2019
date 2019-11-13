@@ -7,7 +7,7 @@
 
 #include <my_printf.h>
 
-static int abs_nb(long nb)
+static long abs_nb(long nb)
 {
     if (nb < 0)
         return (-nb);

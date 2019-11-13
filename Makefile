@@ -32,7 +32,8 @@ $(NAME):	$(OBJ)
 	make -s -C ./lib/my/
 	mv ./lib/$(NAME) .
 
-tests_run:	all
+tests_run:
+	make -s -C ./lib/my/
 	@find . -name "*.gc*" -delete
 	gcc -o unit_tests $(SRC) tests/*.c -L. -lmy $(CFLAGS) --coverage -lcriterion
 	./unit_tests
@@ -51,4 +52,4 @@ fclean:	clean
 
 re:	fclean all
 
-.PHONY:	all tests_run clean fclean re
+.PHONY:	all lib tests_run clean fclean re
