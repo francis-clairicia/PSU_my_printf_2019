@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** my_nbr_len
 ** File description:
-** Lenght ofa number
+** length of a number
 */
 
 #include <my_printf.h>

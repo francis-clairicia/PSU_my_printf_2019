@@ -10,7 +10,7 @@
 int print_hexa_lower(va_list *args, modifier_t *infos)
 {
     unsigned long nb = va_arg(*args, unsigned long);
-    char *l_mod = infos->lenght_modifier;
+    char *l_mod = infos->length_modifier;
     char base[] = "0123456789abcdef";
 
     if (my_strcmp(l_mod, "ll") == 0 || my_strcmp(l_mod, "l") == 0

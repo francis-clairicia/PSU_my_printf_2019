@@ -12,6 +12,8 @@ static int get_str_size(char const *str)
     int i = 0;
     int len = 0;
 
+    if (str == NULL)
+        return (my_strlen("(null)"));
     while (str[i] != '\0') {
         if (str[i] < 32 || str[i] >= 127)
             len += 4;
@@ -53,15 +55,17 @@ int print_str_non_printable(va_list *args, modifier_t *infos)
     int size = get_str_size(str);
 
     len += print_before(infos, size);
-    while (str[i] != '\0') {
-        if (str[i] < 32 || str[i] >= 127) {
-            len += my_printf("\\%.3o", str[i]);
-        } else {
+    if (str == NULL) {
+        my_putstr(NULL);
+        len += print_after(infos, size);
+        return (len + size);
+    } while (str[i] != '\0') {
+        if (str[i] < 32 || str[i] >= 127)
+            my_printf("\\%.3o", str[i]);
+        else
             my_putchar(str[i]);
-            len += 1;
-        }
         i += 1;
     }
     len += print_after(infos, size);
-    return (len);
+    return (len + size);
 }

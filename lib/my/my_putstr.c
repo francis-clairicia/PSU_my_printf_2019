@@ -12,7 +12,7 @@ int my_putstr(char const *str)
     int i = 0;
 
     if (str == NULL)
-        return (my_putstr("NULL"));
+        return (my_putstr("(nil)"));
     while (str[i] != '\0') {
         my_putchar(str[i]);
         i += 1;

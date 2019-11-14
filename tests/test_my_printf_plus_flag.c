@@ -34,5 +34,5 @@ Test(my_printf, plus_flag_zero_padding)
 {
     cr_redirect_stdout();
     my_printf("%0+4d", 6);
-    cr_expect_stdout_eq_str("+0006");
+    cr_expect_stdout_eq_str("+006");
 }

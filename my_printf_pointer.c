@@ -15,7 +15,12 @@ int print_pointer(va_list *args, modifier_t *infos)
     int len = 0;
 
     len += print_before(infos, my_nbr_len_u(nb));
-    len += my_printf("%#lx", nb);
+    if (nb > 0)
+        len += my_printf("%#lx", nb);
+    else {
+        my_putstr("(nil)");
+        len += 5;
+    }
     len += print_after(infos, my_nbr_len_u(nb));
     return (len);
 }

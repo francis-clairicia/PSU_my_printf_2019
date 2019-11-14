@@ -22,33 +22,13 @@ static const flag_t flag_list[] = {
     {NULL, NULL}
 };
 
-static void get_infos(char type, char *modifiers, modifier_t *infos)
-{
-    int i = 0;
-
-    while (modifiers[i] != '\0' && my_find_char("lhq", modifiers[i]) == -1) {
-        if (modifiers[i] == '#' && my_find_char("oxX", type) >= 0)
-            infos->sharp = 1;
-        if (((modifiers[i] == '0' && my_find_char(modifiers, '-') == -1)
-        || (modifiers[i] == '.'))
-        && my_find_char("123456789", modifiers[i + 1])) {
-            infos->char_to_print = '0';
-            infos->padding = my_getnbr(&modifiers[i + 1]);
-        }
-        if (modifiers[i] == '+' && my_find_char("di", type) >= 0)
-            infos->sign = 1;
-        i += 1;
-    }
-    infos->lenght_modifier = &modifiers[i];
-}
-
 static int print_replacing_flag(char type, char *modifiers, va_list *args)
 {
     int i = 0;
     int len = 0;
-    modifier_t infos = {type, my_getnbr(modifiers), ' ', 0, 0, NULL};
+    modifier_t infos = {type, my_getnbr(modifiers), ' ', 0, 0, 0, NULL};
 
-    get_infos(type, modifiers, &infos);
+    get_infos(modifiers, &infos);
     while (flag_list[i].type != NULL) {
         if (my_find_char(flag_list[i].type, type) >= 0)
             len = (flag_list[i].print(args, &infos));

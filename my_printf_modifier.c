@@ -13,13 +13,15 @@ const format_t sharp_format[] = {
     {'X', "0X", 2}
 };
 
-static int print_sharp_format(char type)
+static int print_sharp_format(modifier_t *infos)
 {
     int i = 0;
     int len = 0;
 
+    if (infos->sharp == 0)
+        return (0);
     while (i < 3) {
-        if (sharp_format[i].type == type) {
+        if (sharp_format[i].type == infos->type) {
             my_putstr(sharp_format[i].format);
             len = (sharp_format[i].len);
         }
@@ -28,26 +30,35 @@ static int print_sharp_format(char type)
     return (len);
 }
 
+static int print_blank(modifier_t *infos)
+{
+    if (infos->blank == 1)
+        my_putchar(' ');
+    return (infos->blank);
+}
+
+static int print_sign(modifier_t *infos, char valid_char)
+{
+    if (infos->sign > 0 && infos->char_to_print == valid_char)
+        my_putchar(infos->sign);
+    return (infos->sign > 0 && infos->char_to_print == valid_char);
+}
+
 int print_before(modifier_t *infos, int size_print)
 {
     int i = 0;
     int len = 0;
-    int sign = (infos->sign > 0 && infos->char_to_print == ' ');
+    int sign = (infos->sign > 0);
+    int blank = infos->blank;
 
-    if (infos->sharp == 1)
-        len += print_sharp_format(infos->type);
-    if (infos->sign > 0 && infos->char_to_print == '0') {
-        my_putchar(infos->sign);
-        len += 1;
-    }
-    while (i + size_print + sign < infos->padding) {
+    len += print_sharp_format(infos);
+    len += print_blank(infos);
+    len += print_sign(infos, '0');
+    while (i + size_print + sign + blank < infos->padding) {
         my_putchar(infos->char_to_print);
         i += 1;
     }
-    if (sign == 1) {
-        my_putchar(infos->sign);
-        len += 1;
-    }
+    len += print_sign(infos, ' ');
     return (len + i);
 }
 

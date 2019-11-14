@@ -25,7 +25,8 @@ typedef struct modifier_s
     char char_to_print;
     int sharp;
     char sign;
-    char *lenght_modifier;
+    int blank;
+    char *length_modifier;
 } modifier_t;
 
 typedef struct flag_s
@@ -52,5 +53,6 @@ char *convert_to_base_long(long nb, char const *base);
 int my_putnbr_base_u(unsigned long nb, modifier_t *infos, char const *base);
 int my_putnbr_long(long nb, modifier_t *infos);
 int my_nbr_len_u(unsigned long nb);
+void get_infos(char *modifiers, modifier_t *infos);
 
 #endif
