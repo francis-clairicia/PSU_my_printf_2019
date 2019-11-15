@@ -14,7 +14,9 @@ SRC	=	my_printf.c			\
 		my_printf_decimal.c		\
 		my_printf_hexa_lower.c		\
 		my_printf_hexa_upper.c		\
-		my_printf_infos.c		\
+		my_printf_get_infos.c		\
+		my_printf_get_modifiers.c	\
+		my_printf_flag_errors.c	\
 		my_printf_modifier.c		\
 		my_putnbr_for_printf.c		\
 		my_nbr_len_u.c			\

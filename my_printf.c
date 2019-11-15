@@ -28,6 +28,12 @@ static int print_replacing_flag(char type, char *modifiers, va_list *args)
     int len = 0;
     modifier_t infos = {type, my_getnbr(modifiers), ' ', 0, 0, 0, NULL};
 
+    if (non_valid_flags(modifiers)) {
+        my_putchar('%');
+        my_putstr(modifiers);
+        my_putchar(type);
+        return (my_strlen(modifiers) + 2);
+    }
     get_infos(modifiers, &infos);
     while (flag_list[i].type != NULL) {
         if (my_find_char(flag_list[i].type, type) >= 0)
@@ -37,31 +43,16 @@ static int print_replacing_flag(char type, char *modifiers, va_list *args)
     return (len);
 }
 
-static int get_modifiers(char **modifiers, char const *str)
-{
-    int i = 0;
-
-    while (str[i] != '\0' && my_find_char("%dibouxXcsSp", str[i]) == -1)
-        i += 1;
-    *modifiers = malloc(sizeof(char) * (i + 1));
-    my_strncpy(*modifiers, str, i);
-    (*modifiers)[i] = 0;
-    return (i);
-}
-
 static int my_printf_part2(char const *format, int *i, va_list *args)
 {
     char *modifiers = NULL;
     int n = 0;
 
-    if (format[*i] != '%') {
-        my_putchar(format[*i]);
-        return (1);
-    }
-    *i += 1;
-    *i += get_modifiers(&modifiers, &format[*i]);
-    if (format[*i] == '%'){
+    modifiers = get_modifiers(i, &format[*i]);
+    if (format[*i] == '%' || modifiers == NULL){
         my_putchar('%');
+        if (modifiers == NULL)
+            *i -= 1;
         n = 1;
     } else
         n = print_replacing_flag(format[*i], modifiers, args);
@@ -77,7 +68,13 @@ int my_printf(char const *format, ...)
 
     va_start(args, format);
     while (format[i] != '\0') {
-        nb_print += my_printf_part2(format, &i, &args);
+        if (format[i] != '%') {
+            my_putchar(format[i]);
+            nb_print += 1;
+        } else {
+            i += 1;
+            nb_print += my_printf_part2(format, &i, &args);
+        }
         i += 1;
     }
     va_end(args);

@@ -16,8 +16,7 @@ static void check_sharp(char *mod, int i, modifier_t *infos)
 static void check_padding(char *mod, int i, modifier_t *infos)
 {
     if ((((mod[i] == '0' && my_find_char(mod, '-') == -1))
-    || ((mod[i] == '.') && my_find_char("123456789", mod[i + 1])))
-    && infos->char_to_print == ' ') {
+    || (mod[i] == '.')) && infos->char_to_print == ' ') {
         infos->char_to_print = '0';
         infos->padding = my_getnbr(&mod[i + 1]);
     }

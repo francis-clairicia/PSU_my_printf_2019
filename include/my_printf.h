@@ -53,6 +53,8 @@ char *convert_to_base_long(long nb, char const *base);
 int my_putnbr_base_u(unsigned long nb, modifier_t *infos, char const *base);
 int my_putnbr_long(long nb, modifier_t *infos);
 int my_nbr_len_u(unsigned long nb);
+char *get_modifiers(int *i, char const *str);
+int non_valid_flags(char *mod);
 void get_infos(char *modifiers, modifier_t *infos);
 
 #endif
