@@ -7,7 +7,7 @@
 
 #include <my_printf.h>
 
-static int check_precision(char *mod, char flag)
+static int check_precision(char const *mod, char flag)
 {
     int i = my_find_char(mod, flag);
 
@@ -20,7 +20,7 @@ static int check_precision(char *mod, char flag)
     return (0);
 }
 
-int non_valid_flags(char *mod)
+int non_valid_flags(char const *mod)
 {
     if (check_precision(mod, '-') == 1)
         return (1);
