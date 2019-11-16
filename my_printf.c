@@ -46,13 +46,14 @@ static int print_replacing_flag(char type, char *modifiers, va_list *args)
 static int my_printf_part2(char const *format, int *i, va_list *args)
 {
     char *modifiers = NULL;
+    int index_save = *i;
     int n = 0;
 
     modifiers = get_modifiers(i, &format[*i]);
     if (format[*i] == '%' || modifiers == NULL){
         my_putchar('%');
         if (modifiers == NULL)
-            *i -= 1;
+            *i = index_save;
         n = 1;
     } else
         n = print_replacing_flag(format[*i], modifiers, args);
